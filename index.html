@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조동사 확신도 퀴즈</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .modal-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .modal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .modal-word {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .pronunciation {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .confidence {
+            font-size: 1.1em;
+            color: #444;
+            margin-bottom: 15px;
+        }
+        
+        .example {
+            background: rgba(255,255,255,0.7);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 3px solid #667eea;
+        }
+        
+        .speaker-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            margin: 0 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .speaker-btn:hover {
+            background: #5a6fd8;
+            transform: scale(1.1);
+        }
+        
+        .quiz-section {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .quiz-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .quiz-btn:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+        }
+        
+        .quiz-question {
+            font-size: 1.5em;
+            margin: 20px 0;
+            color: #333;
+        }
+        
+        .result {
+            font-size: 1.3em;
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        
+        .correct {
+            background: #4caf50;
+            color: white;
+        }
+        
+        .incorrect {
+            background: #f44336;
+            color: white;
+        }
+        
+        .highlight {
+            color: #00c853;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .score {
+            text-align: center;
+            font-size: 1.5em;
+            color: #333;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 조동사 확신도 마스터!</h1>
+        
+        <div class="modal-card">
+            <div class="modal-word">MUST <span class="highlight">M</span>ust <button class="speaker-btn" onclick="speak('must')">🔊</button></div>
+            <div class="pronunciation">[머스트]</div>
+            <div class="confidence">💯 임에 틀림없다 (100% 확신)</div>
+            <div class="example">
+                It <strong>must</strong> be true! (그것은 틀림없이 사실이야!)
+                <button class="speaker-btn" onclick="speak('It must be true')">🔊</button>
+            </div>
+        </div>
+        
+        <div class="modal-card">
+            <div class="modal-word">SHOULD <span class="highlight">S</span>hould <button class="speaker-btn" onclick="speak('should')">🔊</button></div>
+            <div class="pronunciation">[슈드]</div>
+            <div class="confidence">😊 확실하다 (80% 확신)</div>
+            <div class="example">
+                You <strong>should</strong> study hard. (너는 열심히 공부해야 해.)
+                <button class="speaker-btn" onclick="speak('You should study hard')">🔊</button>
+            </div>
+        </div>
+        
+        <div class="modal-card">
+            <div class="modal-word">WOULD <span class="highlight">W</span>ould <button class="speaker-btn" onclick="speak('would')">🔊</button></div>
+            <div class="pronunciation">[우드]</div>
+            <div class="confidence">🤔 확실한 것 같다 (60% 확신)</div>
+            <div class="example">
+                I <strong>would</strong> like pizza. (나는 피자를 좋아할 것 같아.)
+                <button class="speaker-btn" onclick="speak('I would like pizza')">🔊</button>
+            </div>
+        </div>
+        
+        <div class="modal-card">
+            <div class="modal-word">COULD <span class="highlight">C</span>ould <button class="speaker-btn" onclick="speak('could')">🔊</button></div>
+            <div class="pronunciation">[쿠드]</div>
+            <div class="confidence">😐 그런 것 같다 (50% 확신)</div>
+            <div class="example">
+                It <strong>could</strong> rain today. (오늘 비가 올 수도 있어.)
+                <button class="speaker-btn" onclick="speak('It could rain today')">🔊</button>
+            </div>
+        </div>
+        
+        <div class="modal-card">
+            <div class="modal-word">MAY <span class="highlight">M</span>ay <button class="speaker-btn" onclick="speak('may')">🔊</button></div>
+            <div class="pronunciation">[메이]</div>
+            <div class="confidence">🤷 아마도 그런 것 같다 (30% 느낌)</div>
+            <div class="example">
+                She <strong>may</strong> come later. (그녀는 나중에 올지도 몰라.)
+                <button class="speaker-btn" onclick="speak('She may come later')">🔊</button>
+            </div>
+        </div>
+        
+        <div class="modal-card">
+            <div class="modal-word">MIGHT <span class="highlight">MI</span>ght <button class="speaker-btn" onclick="speak('might')">🔊</button></div>
+            <div class="pronunciation">[마이트]</div>
+            <div class="confidence">😅 그랬었나 머지! (10% 느낌)</div>
+            <div class="example">
+                We <strong>might</strong> go shopping. (우리는 쇼핑을 갈 수도 있어.)
+                <button class="speaker-btn" onclick="speak('We might go shopping')">🔊</button>
+            </div>
+        </div>
+        
+        <div class="quiz-section">
+            <h2>🧠 퀴즈 타임!</h2>
+            <div class="score">점수: <span id="score">0</span> / <span id="total">0</span></div>
+            
+            <div id="quiz-area">
+                <div class="quiz-question" id="question">퀴즈 시작 버튼을 눌러주세요!</div>
+                <div id="options"></div>
+                <div id="result"></div>
+            </div>
+            
+            <button class="quiz-btn" onclick="startQuiz()">퀴즈 시작!</button>
+            <button class="quiz-btn" onclick="nextQuestion()">다음 문제</button>
+        </div>
+    </div>
+    
+    <script>
+        const modalVerbs = [
+            { word: 'must', confidence: '100% 확신', korean: '임에 틀림없다', example: 'It must be true' },
+            { word: 'should', confidence: '80% 확신', korean: '확실하다', example: 'You should study hard' },
+            { word: 'would', confidence: '60% 확신', korean: '확실한 것 같다', example: 'I would like pizza' },
+            { word: 'could', confidence: '50% 확신', korean: '그런 것 같다', example: 'It could rain today' },
+            { word: 'may', confidence: '30% 느낌', korean: '아마도 그런 것 같다', example: 'She may come later' },
+            { word: 'might', confidence: '10% 느낌', korean: '그랬었나 머지!', example: 'We might go shopping' }
+        ];
+        
+        let currentQuestion = 0;
+        let score = 0;
+        let totalQuestions = 0;
+        
+        function speak(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.8;
+            speechSynthesis.speak(utterance);
+        }
+        
+        function startQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            totalQuestions = 0;
+            nextQuestion();
+        }
+        
+        function nextQuestion() {
+            if (currentQuestion >= modalVerbs.length) {
+                showFinalResult();
+                return;
+            }
+            
+            const verb = modalVerbs[currentQuestion];
+            const wrongOptions = modalVerbs.filter(v => v.word !== verb.word);
+            const options = [verb, ...wrongOptions.slice(0, 2)].sort(() => Math.random() - 0.5);
+            
+            document.getElementById('question').innerHTML = `
+                <div>"${verb.korean}"를 영어로 하면?</div>
+                <div style="margin-top: 10px; font-size: 0.9em; color: #666;">${verb.confidence}</div>
+            `;
+            
+            const optionsHtml = options.map(option => 
+                `<button class="quiz-btn" onclick="checkAnswer('${option.word}', '${verb.word}')">${option.word.toUpperCase()}</button>`
+            ).join('');
+            
+            document.getElementById('options').innerHTML = optionsHtml;
+            document.getElementById('result').innerHTML = '';
+            
+            currentQuestion++;
+            totalQuestions++;
+            updateScore();
+        }
+        
+        function checkAnswer(selected, correct) {
+            const resultDiv = document.getElementById('result');
+            if (selected === correct) {
+                score++;
+                resultDiv.innerHTML = `<div class="result correct">정답! 🎉 ${correct.toUpperCase()}가 맞아요!</div>`;
+                speak('Correct! ' + correct);
+            } else {
+                resultDiv.innerHTML = `<div class="result incorrect">틀렸어요! 😅 정답은 ${correct.toUpperCase()}입니다.</div>`;
+                speak('Wrong! The answer is ' + correct);
+            }
+            updateScore();
+        }
+        
+        function updateScore() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('total').textContent = totalQuestions;
+        }
+        
+        function showFinalResult() {
+            const percentage = Math.round((score / totalQuestions) * 100);
+            let message = '';
+            
+            if (percentage >= 90) {
+                message = '🏆 완벽해요! 조동사 마스터!';
+            } else if (percentage >= 70) {
+                message = '👍 잘했어요! 조금만 더 연습해요!';
+            } else {
+                message = '💪 다시 도전해보세요!';
+            }
+            
+            document.getElementById('question').innerHTML = `
+                <div>퀴즈 완료!</div>
+                <div style="margin-top: 15px;">${message}</div>
+                <div style="margin-top: 10px; font-size: 1.2em;">최종 점수: ${score}/${totalQuestions} (${percentage}%)</div>
+            `;
+            
+            document.getElementById('options').innerHTML = '';
+            document.getElementById('result').innerHTML = '';
+        }
+    </script>
+</body>
+</html>
